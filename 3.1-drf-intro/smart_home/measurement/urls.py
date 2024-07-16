@@ -1,5 +1,14 @@
 from django.urls import path
+from .views import SensorsView, SensorRetrieveUpdateView, MeasurementCreateView
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
 
 urlpatterns = [
-    # TODO: зарегистрируйте необходимые маршруты
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('schema/swagger-ui/',
+         SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('sensors/', SensorsView.as_view(), name='sensors'),
+    path('sensors/<int:pk>/', SensorRetrieveUpdateView.as_view(),
+         name='sensor'),
+    path('measurements/', MeasurementCreateView.as_view(), name='measurements'),
 ]
